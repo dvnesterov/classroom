@@ -1,0 +1,27 @@
+f = [[]]
+
+def init():
+    global f
+    f = [[0 for _ in range(8)] for _ in range(8)]
+    f[7][7] = 1
+
+def draw():
+    global f
+    for y in range(8):
+        print(f[y], end='\n')
+
+def hk(x, y):
+    # 9h  x-2  y-1
+    # 7h  x-1  y-2
+    # 5h  x+1  y-2
+    # 3h  x+1  y-2
+
+
+def khodkonem(y, x):
+    pass
+    # 9h
+    #if y + 1 < 8 and x - 2 > 0:
+    #f[][]
+
+init()
+draw()
