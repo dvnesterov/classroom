@@ -1,0 +1,46 @@
+import networkx as nx
+import my_queue
+
+my_queue.clear()
+
+lst = ['a', 'b', 'c', 'd', 'e', 'f']
+
+G = nx.DiGraph()
+G.add_nodes_from(lst)
+
+G.add_edge('a', 'd')
+G.add_edge('a', 'b')
+
+G.add_edge('b', 'a')
+G.add_edge('b', 'c')
+G.add_edge('b', 'd')
+
+G.add_edge('c', 'b')
+G.add_edge('c', 'd')
+
+G.add_edge('d', 'a')
+G.add_edge('d', 'b')
+G.add_edge('d', 'c')
+G.add_edge('d', 'f')
+G.add_edge('d', 'e')
+
+G.add_edge('e', 'd')
+G.add_edge('e', 'f')
+
+G.add_edge('f', 'd')
+G.add_edge('f', 'e')
+
+# print (G['d'])
+
+my_queue.enqueue('a')
+visited = ['a']
+
+print('q=', my_queue.queue)
+nd = G[my_queue.dequeue()]
+print (nd.keys())
+for x in nd:
+    print(x)
+    if not (x in visited):
+        my_queue.enqueue(x)
+
+print('q=', my_queue.queue)
