@@ -33,14 +33,23 @@ G.add_edge('f', 'e')
 # print (G['d'])
 
 my_queue.enqueue('a')
-visited = ['a']
+visited = []
 
-print('q=', my_queue.queue)
-nd = G[my_queue.dequeue()]
-print (nd.keys())
-for x in nd:
-    print(x)
-    if not (x in visited):
-        my_queue.enqueue(x)
+while True:
+    print('queue=', my_queue.queue)
+    print('visited=', visited)
+    node = my_queue.dequeue()
+    print('node=>', node)
+    visited += [node]
+    nd = G[node]
+    #lst2 = list(G.neighbors())
+    #print (nd.keys())
+    for x in nd:
+        if not (x in visited):
+            print(x)
+            visited += [x]
+            my_queue.enqueue(x)
+    if input('Exit - 0') == '0':
+        break
 
-print('q=', my_queue.queue)
+
