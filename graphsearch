@@ -3,10 +3,10 @@ import my_queue
 
 my_queue.clear()
 
-lst = ['a', 'b', 'c', 'd', 'e', 'f']
+nodes = ['a', 'b', 'c', 'd', 'e', 'f']
 
-G = nx.DiGraph()
-G.add_nodes_from(lst)
+G = nx.Graph()
+G.add_nodes_from(nodes)
 
 G.add_edge('a', 'd')
 G.add_edge('a', 'b')
@@ -21,8 +21,8 @@ G.add_edge('c', 'd')
 G.add_edge('d', 'a')
 G.add_edge('d', 'b')
 G.add_edge('d', 'c')
-G.add_edge('d', 'f')
 G.add_edge('d', 'e')
+G.add_edge('d', 'f')
 
 G.add_edge('e', 'd')
 G.add_edge('e', 'f')
@@ -32,24 +32,37 @@ G.add_edge('f', 'e')
 
 # print (G['d'])
 
-my_queue.enqueue('a')
-visited = []
 
-while True:
+print (G.nodes)
+print (G.edges)
+
+my_queue.enqueue('a')
+visited = ['a']
+
+xstep = 1
+while len(my_queue.queue) > 0:
+    print('step=', xstep)
     print('queue=', my_queue.queue)
     print('visited=', visited)
     node = my_queue.dequeue()
-    print('node=>', node)
-    visited += [node]
-    nd = G[node]
-    #lst2 = list(G.neighbors())
-    #print (nd.keys())
-    for x in nd:
-        if not (x in visited):
-            print(x)
-            visited += [x]
-            my_queue.enqueue(x)
+    print('dequeue node=>', node)
+    print('queue2=', my_queue.queue)
+
     if input('Exit - 0') == '0':
         break
+
+    # visited.append(node)
+    nd = G[node]  # lst2 = list(G.neighbors()) #print (nd.keys())
+
+    for x in nd:
+        if x not in visited:
+            print("enqueue", x)
+            visited.append(x)
+            my_queue.enqueue(x)
+
+    xstep += 1
+    print('LEN=', len(my_queue.queue))
+
+print('DONE:', visited)
 
 
