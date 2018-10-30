@@ -1,0 +1,64 @@
+import networkx as nx
+
+tracker = []
+visited = []
+
+# nodes = ['a', 'b', 'c', 'd', 'e']
+infx = float("inf")
+cost = {'a': 0, 'b' : infx, 'c': infx, 'd': infx, 'e': infx}
+
+G = nx.DiGraph()
+G.add_nodes_from(cost.keys()) # nodes
+G.add_weighted_edges_from([('a', 'd', 60), ('a', 'c', 12),
+                           ('b', 'a', 10),
+                           ('c', 'd', 32), ('c', 'b', 20),
+                           ('e', 'a', 7)])
+
+# G.adj[node]
+# G.neighbpurs(node)
+
+def getmincostnode():
+    # print(cost.items())
+    # print(cost.values())
+
+    nodev = ''
+    minv = infx
+    for x in cost.items():
+        if (x[1] < minv) and (x[0] not in visited):
+            minv = x[1]
+            nodev = x[0]
+
+    return nodev
+
+def run():
+    node = 'a'
+    nextnode = '?'
+    # for x in G.neighbors(node):
+    #     print(G[node][x]['weight'])
+
+    while nextnode!= '':
+        tracker.append(node)
+        visited.append(node)
+        for nbr in G.neighbors(node):
+            print('node -> nbr', node, nbr)
+            wt = G[node][nbr]['weight']
+            print(wt)
+            newcost = cost[node] + wt
+            if cost[nbr] > newcost:
+                cost[nbr] = newcost
+
+                print("visited", visited)
+                print("cost", cost)
+
+
+        nextnode = getmincostnode()
+        print('nextnode', nextnode)
+        node = nextnode
+
+        if input("Exit - 0 ") == '0':
+            break
+
+    return tracker
+
+getmincostnode()
+run()
