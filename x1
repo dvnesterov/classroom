@@ -1,0 +1,38 @@
+def xxxrun():
+
+    node = 'a'
+
+    while True:
+        tracker.append(node)
+        # nd = list(G.neighbors(node))
+
+        for x in G.neighbors[a]:
+            b = G[a][x]
+
+        z = G.adj['a']
+        print('z', z)
+
+        for n, nbrs in G.adj.items():
+
+            print(n, nbrs)
+            visited.append(n)
+            mincost = infx
+            for nbr, eattr in nbrs.items():
+                wt = eattr['weight']
+                print(n, nbr, wt)
+                # if nbr not in visited:
+
+                newcost = cost[n] + wt
+                if mincost > newcost:
+                    newcost = mincost
+
+                if cost[nbr] > newcost:
+                    cost[nbr] = newcost
+
+                print("visited", visited)
+                print("cost", cost)
+
+            if input("Exit - 0 ") =='0':
+                break
+
+    return tracker
