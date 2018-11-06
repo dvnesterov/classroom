@@ -1,0 +1,45 @@
+def kselect(cou = 0):
+    data = [10, 5, 9, 7, 8, 3, 22]
+    infx = float("inf")
+    res = []
+
+    cc = 0
+    while (cou == 0) or (cc < cou) :
+        offset = 0
+        minpos = 0
+        r = infx
+        for x in data:
+            if x < r:
+                r = x
+                minpos = offset
+            offset += 1
+        if r == infx:
+             break
+        res.append(r)
+        data[minpos] = infx
+        cc += 1
+
+    print(res)
+    print(data)
+
+def bubble():
+    data = [10, 5, 9, 7, 8, 3, 22, 1]
+
+    sorted = 0
+    for iter in range(len(data)):
+        isStop = True
+        for i in range(1, len(data) - sorted):
+            if data[i] < data[i - 1]:
+                data[i - 1], data[i] = data[i], data[i-1]
+                isStop = False
+        sorted += 1
+        print(data)
+        if isStop:
+            break
+
+    # print(data)
+
+
+
+bubble()
+#kselect(3)
