@@ -1,0 +1,29 @@
+import random
+
+def qsort(arr, left, right):
+
+    i = left
+    j = right
+
+    if i >= j:
+        return
+
+    xelem = arr[random.randint(left, right)]
+
+    while i < j:
+        while arr[i] < xelem:
+            i += 1
+        while arr[j] > xelem:
+            j -= 1
+        arr[i], arr[j] = arr[j], arr[i]
+
+    qsort(arrx, left, i)
+    qsort(arrx, i+1, right)
+
+# arrx = [1, 2, 36, 4, 8, 15, 6]
+arrx = [1, 9, 2, 11, 36, 4, 48, 8, 15, 6]
+
+print(arrx)
+
+qsort(arrx, 0, len(arrx)-1)
+print(arrx)
