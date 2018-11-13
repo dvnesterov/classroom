@@ -1,0 +1,43 @@
+class SummatorError(Exception):
+    pass
+
+class InputDataTypeError(SummatorError):
+    pass
+
+class EmptyListError(SummatorError):
+    pass
+
+def sum(arr: list):
+    sum_ = 0
+    for x in arr:
+        if type(x) == int or type(x) == float :
+            sum_ += x
+        else:
+            raise InputDataTypeError
+
+    return sum_
+
+
+
+def avg(arr: list):
+    try:
+        # raise Exception
+        sum_ = 0
+        for x in arr:
+            sum_ += x
+
+        return sum_ / len(arr)
+
+
+    except Exception:
+        print("Warn!")
+
+
+
+data= [1,2,"3"]
+ret = sum(data)
+print(ret)
+ret = avg(data)
+print(ret)
+
+
