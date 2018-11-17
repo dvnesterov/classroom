@@ -1,0 +1,116 @@
+lst = [i for i in range(10)]
+
+print(lst)
+
+def even(x):
+    return x%2==0
+
+def pwr2 (x):
+    return x**2
+
+res = map(pwr2, filter(even, lst))
+print(list(res))
+
+
+res = map(lambda x: x**2, filter(lambda x: x % 2 == 0, lst))
+print(list(res))
+
+ #  i for i in itertools. count(2, 2)
+ 
+ 
+ +++++
+ 
+ a = 'hello world'
+b = [1, 3, 2]
+
+# se = enumerate(s)
+# for x in se:
+#     print(x)
+#
+# def f(x):
+#     print('-', x)
+#     return x[0] in d
+#
+# res = "".join(filter(f, se))
+# print(res)
+
+
+
+
+print("".join([a[i] for i in range(len(a)) if i in b]))
+print("".join(map(lambda x: x[1], filter(lambda x: x[0] in b, enumerate(a))))
+
+
+
+
++++++++
+
+
+def count(start, step):
+    counter = start
+    while True:
+        yield counter
+        counter += 1
+
+
+# for i in count(1, 3):
+#     print(i)
+
+
+def fib():
+    yield 0
+    prev = 0
+    cur = 1
+    while True:
+        yield cur
+        prev, cur = cur, prev + cur
+
+# for i in fib():
+#     print(i)
+
+import itertools
+
+def prime():
+    prime_set = set()
+    prime_set.add(2)
+    yield 2
+    for i in itertools.count(3,2):
+        if all(i % prime_n for prime_n in prime_set):
+            prime_set.add(i)
+            yield i
+
+for i in prime():
+    print(i)
+    
+    
+    +++++++
+    
+    
+ 
+ def grep(pattern):
+    i = 0
+    while True:
+        line = yield
+        if pattern in line:
+            i += 1
+            print("Found, overall: {}".format(i))
+
+g= grep("корова")
+g.send(None) # next(g)
+g.send("корова мычит")
+
+
++++++
+
+
+
+def sword(sdata):
+    counter = 1
+    while True:
+        s[:s.find(' ')]
+        counter += 1
+
+
+
+s = "asd df hj"
+print()
