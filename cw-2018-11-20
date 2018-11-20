@@ -1,0 +1,96 @@
+def mydec (fun):
+    def wrapper(*ar, **kw):
+        fun(*ar, **kw)
+        fun(*ar, **kw)
+    return wrapper
+
+
+@mydec
+def say(word):
+    print(word)
+
+@mydec
+def say2(word1, word2):
+    print(word1)
+    print(word2)
+
+# ----
+
+
+def counter(fun):
+    def wrapper (*ar, **kw):
+        res = fun(*ar, **kw)
+        wrapper.count += 1
+        print("Функция была вызвана {} раз".format((wrapper.count)))
+        return res
+    wrapper.count = 0
+    return wrapper
+
+@counter
+def f():
+    pass
+
+# while True:
+#     f()
+
+
+# ----
+import datetime
+import time
+
+def showtime(fun):
+    def wrapper (*ar, **kw):
+        perf = time.perf_counter()
+        res = fun(*ar, **kw)
+        perf = time.perf_counter() - perf
+        wrapper.count += 1
+        wrapper.starttime = datetime.datetime.now()
+        print("Функция {} была вызвана {} раз {}".format(wrapper.fname, wrapper.starttime, wrapper.count ))
+        print("Время работы функции {}".format(perf))
+        return res
+    wrapper.fname = fun.__name__
+    wrapper.count = 0
+
+    return wrapper
+
+@showtime
+def f2():
+    time.sleep(1)
+    pass
+
+f2()
+f2()
+f2()
+f2()
+
+
+# ----- CACHE DECORATOR
+"""
+import time
+
+def funcache(fun):
+
+    def wrapper(*ar, **kw):
+        xar = "AR:" + str(ar)
+        print(xar)
+        xkw = "KW:" + str(kw)
+        print(xkw)
+        data = xar + xkw
+        print(data)
+        cache.add(data)
+
+        res = fun(*ar, **kw)
+        print("Run {}".format(0))
+        return res
+    wrapper.cache = {}
+
+    return wrapper
+
+@funcache
+def f3(x, y, z, **kw):
+    time.sleep(1)
+    pass
+
+f3(1, 2, 3, n1=4, n2=5)
+f3(3 ,4 ,5)
+"""
