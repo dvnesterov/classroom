@@ -1,0 +1,20 @@
+import json
+lst = [1, 2, 3, "qwerty", True, {'a': 1, 'b': 2}, 99]
+
+# with open('c:/test/testjson.dat', 'wt') as f:
+#     f.write(json.dumps(lst))
+
+
+import pickle
+
+with open('c:/test/testpickle0.dat', 'wb') as f:
+    f.write(pickle.dumps(lst, protocol=0))
+
+
+import sys
+import argparse
+
+print(sys.argv)
+parser = argparse.ArgumentParser(description="desc")
+parser.add_argument('-n')
+
