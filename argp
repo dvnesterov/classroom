@@ -1,0 +1,37 @@
+import sys
+import argparse
+
+def seqencer(start):
+    n = start
+    while True:
+        data = yield n
+        if data is None:
+            n += 1
+        else:
+            n = data
+
+print(sys.argv)
+parser = argparse.ArgumentParser(description="Арифметическая прогрессия")
+parser.add_argument('-start', dest='start', action='store', type=int, required=True, help='начальное значение')
+parser.add_argument('-step', dest='step', action='store', type=int, required=True, help='шаг')
+parser.add_argument('-count', dest='count', action='store', type=int, required=True, help='количество')
+parser.add_argument('--save', dest='count', action='store', type=int, required=True, help='количество')
+args = parser.parse_args(sys.argv[1:])
+
+print('start', args.start, 'step', args.step, 'count', args.count)
+
+g = seqencer(0)
+g.send(None)
+
+cou = 1
+st = 0
+print(g.send(args.start))
+while cou < args.count :
+    st += 1
+    if st == args.step:
+        print(g.send(None))
+        st = 0
+        cou += 1
+    else:
+        g.send(None)
+
