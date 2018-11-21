@@ -15,10 +15,11 @@ parser = argparse.ArgumentParser(description="Арифметическая пр�
 parser.add_argument('-start', dest='start', action='store', type=int, required=True, help='начальное значение')
 parser.add_argument('-step', dest='step', action='store', type=int, required=True, help='шаг')
 parser.add_argument('-count', dest='count', action='store', type=int, required=True, help='количество')
-parser.add_argument('--save', dest='count', action='store', type=int, required=True, help='количество')
+# subparser = parser.add_subparsers(dest='cmd')
+parser.add_argument('-output', dest='out', action='store', type=str, help='имя файла')
 args = parser.parse_args(sys.argv[1:])
 
-print('start', args.start, 'step', args.step, 'count', args.count)
+print('start', args.start, 'step', args.step, 'count', args.count, 'out', args.out)
 
 g = seqencer(0)
 g.send(None)
@@ -26,7 +27,7 @@ g.send(None)
 cou = 1
 st = 0
 print(g.send(args.start))
-while cou < args.count :
+while cou < args.count:
     st += 1
     if st == args.step:
         print(g.send(None))
