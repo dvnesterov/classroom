@@ -1,0 +1,52 @@
+import re
+
+def iso8601():
+    s = input("Enter string:")
+    regex = r"\d\d\d\d-((?:0[1-9])|(?:1[0-2]))-((?:0[1-9])|(?:[12][0-9])|(?:3[01]))"
+    a = re.search(regex, s)
+    print(a[0] if a else "Not found")
+
+
+# iso8601()
+
+def wcou():
+    s = input("Enter string:")
+    if s == '':
+        s = 'Шел я лесом, вижу мост'
+    a = re.split('\W+', s)
+    print(a)
+    print(len(a))
+
+# wcou()
+
+def showletters():
+    return
+
+
+def abbr():
+    s = 'Шла Маша по шоссе'
+    regex='(?:^|\s)(\w)'   \b\w
+    a = re.findall(regex, s)
+    # "".join().upper()
+    for x in a:
+        print(x.upper(), end="")
+
+    return
+
+abbr()
+
+
+def E164():
+    """
+        7 (911) 333-33-33
+        +7 911 333 33 33
+        (7911)3334455
+        +7 911 3333333444
+        9113334455
+
+
+        +3580444567788
+
+
+    """
+    return
