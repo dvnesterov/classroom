@@ -1,0 +1,65 @@
+import requests
+import binascii
+import hashlib
+import json
+
+r = requests.get('http://192.168.16.114:5000/api/task', timeout=3)
+print(r.text)
+d = json.loads(r.text)
+print(d['start_value'])
+
+for i in range(9):
+    a = binascii.unhexlify(d['start_value'] + str(i))
+    print(a)
+    a = hashlib.sha256(a).digest()
+    a = hashlib.sha256(a).digest()
+    a = binascii.hexlify(a)
+
+    if a[-3:] == b'000':
+        d['number'] =
+
+        data = json.dumps(d)
+        print(data)
+
+        hdrs = {"content-type": "application/json"}
+        r = requests.post('http://192.168.16.114:5000/api/ch', data, headers=hdrs)
+        print(r.text)
+
+
+
+
+
+
+
+
+
+
+
+
+import requests
+import binascii
+import hashlib
+import json
+
+par = {'id':'4'}
+r = requests.get('http://192.168.16.114:5000/api/task', params=par, timeout=3)
+print(r.text)
+d = json.loads(r.text)
+print(d['start_value'])
+print(r.headers['content-type'])
+x = d['start_value'] + 1
+print(x)
+d['number'] = 1000003
+
+data = json.dumps(d)
+print(data)
+
+hdrs = {"content-type": "application/json"}
+r = requests.post('http://192.168.16.114:5000/api/ch', data, headers=hdrs)
+print(r.text)
+
+# print(r.status_code)
+# print(r.headers['content-type'])
+# print(r.encoding)
+
+
