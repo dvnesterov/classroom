@@ -1,0 +1,346 @@
+# -*- coding: utf-8
+
+# Лабораторная работа № 1
+# Объектно-ориентированное программирование (ООП) на языке Python
+# Тема 1.1 Основы ООП. Понятие класса, объекта. Создание экземпляра класса
+
+# Слушатель (ФИО): Нестеров Д.В.
+
+# ---------------------------------------------------------------------------------------------
+# Понятие класса, объекта (стр. 1-22)
+
+# 1. Создайте класс Glass
+#    Обязательно проверяйте типы (TypeError) и значения переменных (ValueError)
+
+
+class Glass:
+    def __init__(self, capacity_vol: (int, float), occuped_vol: (int, float)):
+        try:
+            if not isinstance(capacity_vol, (int, float)):
+                raise TypeError
+
+            if not isinstance(occuped_vol, (int, float)):
+                raise TypeError
+
+            if capacity_vol <= 0:
+                raise ValueError
+
+            if occuped_vol < 0:
+                raise ValueError
+
+            self.capacity_volume = capacity_vol
+            self.occuped_volume = occuped_vol
+
+        except TypeError:
+            print("Input params value error")
+
+        except ValueError:
+            print("Input params value error")
+
+
+# 2. Создайте два и более объектов типа Glass
+#    Измените и добавьте в любой стакан любое кол-во воды (через атрибуты)
+#    Убедитесь, что у других объект атрибуты экземпляра класса не изменились.
+
+print("Task #2")
+glass1 = Glass(500, 100)
+glass2 = Glass(750, 100)
+glass3 = Glass(1000, 100)
+
+glass1.occuped_volume += 150
+
+print(glass1.occuped_volume)
+print(glass2.occuped_volume)
+print(glass3.occuped_volume)
+
+
+# 3. Создайте класс Стакан2 (нужен только __init__) c аргументом occupied_volume
+#    По умолчанию occupied_volume равен нулю. Создайте два объекта с 0 и 200
+#    Обязательно проверяйте типы (TypeError) и значения переменных (ValueError)
+
+class GlassTwo:
+    def __init__(self, occuped_vol: (int, float)=0):
+        try:
+            if not isinstance(occuped_vol, (int, float)):
+                raise TypeError
+
+            if occuped_vol < 0:
+                raise ValueError
+
+            self.occuped_volume = occuped_vol
+
+        except TypeError:
+            print("Input params value error")
+
+        except ValueError:
+            print("Input params value error")
+
+
+glass2_1 = GlassTwo()
+glass2_2 = GlassTwo(200)
+
+print("Task #3")
+print(glass2_1.occuped_volume)
+print(glass2_2.occuped_volume)
+
+
+# 4. Создайте класс стакан3 (нужен только __init__) c аргументами capacity_volume, occupied_volume.
+#    Пусть аргументом по умолчанию для __init__ occupied_volume = []. Будет список.
+#    Попробуйте создать 3 объекта, которые изменяют occupied_volume.append(2)
+#    Опишите результат.
+#    Подсказка: можно ли использовать для аргументов по умолчанию изменяемые типы?
+
+# def f(a=[]):
+#     a.append(1)
+#     print(a)
+#
+# f()
+# f()
+# f()
+# f()
+
+class GlassThree:
+    def __init__(self, capacity_vol: (int, float), occuped_vol=[]):
+        try:
+            if not isinstance(capacity_vol, (int, float)):
+                raise TypeError
+
+            if capacity_vol <= 0:
+                raise ValueError
+
+            if capacity_vol < occuped_vol:
+                raise ValueError
+
+            self.capacity_volume = capacity_vol
+            self.occuped_volume = occuped_vol
+
+        except TypeError:
+            print("Input params value error")
+
+        except ValueError:
+            print("Input params value error")
+
+
+glass3_1 = GlassThree(1000)
+glass3_2 = GlassThree(2000)
+
+print("Task #3")
+print('glass3_1', glass3_1.occuped_volume)
+glass3_1.occuped_volume.append(444)
+print('glass3_1', glass3_1.occuped_volume)
+
+print('glass3_2', glass3_2.occuped_volume)
+glass3_2.occuped_volume.append(555)
+print('glass3_2', glass3_2.occuped_volume)
+print('glass3_1', glass3_2.occuped_volume)
+
+
+# 5. Создайте класс Glass, добавьте методы add_water, remove_water
+#    Обязательно проверяйте типы (TypeError) и значения переменных (ValueError)
+#    Вызовите методы add_water и remove.
+#    Убедитесь, что методы правильно изменяют атрибуты.
+
+
+class GlassFour:
+    def __init__(self, capacity_vol: (int, float), occuped_vol: (int, float)):
+        try:
+            if not isinstance(capacity_vol, (int, float)):
+                raise TypeError
+
+            if capacity_vol <= 0:
+                raise ValueError
+
+            if not isinstance(occuped_vol, (int, float)):
+                raise TypeError
+
+            if occuped_vol < 0:
+                raise ValueError
+
+            self.capacity_volume = capacity_vol
+            self.occuped_volume = occuped_vol
+
+        except TypeError:
+            print("Input params value error")
+
+        except ValueError:
+            print("Input params value error")
+
+    def add_water(self, vol: (int, float)):
+        try:
+            if not isinstance(vol, (int, float)):
+                raise TypeError
+
+            if vol < 0:
+                raise ValueError
+
+            self.occuped_volume += vol
+
+        except TypeError:
+            print("Input params value error")
+
+        except ValueError:
+            print("Input params value error")
+
+
+    def remove_water(self, vol: (int, float)):
+        try:
+            if not isinstance(vol, (int, float)):
+                raise TypeError
+
+            if vol < 0:
+                raise ValueError
+
+            self.occuped_volume -= vol
+
+            if self.occuped_volume < 0:
+                print (">>>", self.occuped_volume)
+                raise ValueError
+
+        except TypeError:
+            print("Input params value error")
+
+        except ValueError:
+            print("Input params value error")
+
+print("Task #5")
+glass4_1 = GlassFour(2000, 1000)
+print('glass5_1', glass4_1.occuped_volume)
+glass4_1.add_water(555)
+print('Add water to glass5_1', glass4_1.occuped_volume)
+glass4_1.remove_water(2300)
+print('Remove water from glass5_1', glass4_1.occuped_volume)
+
+
+# 6. Создайте три объекта типа Glass, вызовите функцию dir для трёх объектов и для класса Glass.
+#    а. Получите типы объектов и класса
+#    б. Проверьте тип созданного объекта.
+
+# ---------------------------------------------------------------------------------------------
+# Внутренние объекты класса (стр. 25-33)
+
+print("Task #6")
+glass4_2 = GlassFour(2000, 1000)
+glass4_3 = GlassFour(2000, 1000)
+print(dir(glass4_1))
+print(dir(glass4_2))
+print(dir(glass4_3))
+print(dir(GlassFour))
+print(type(glass4_1))
+print(type(glass4_2))
+print(type(glass4_3))
+print(type(GlassFour))
+if isinstance(glass4_1, GlassFour):
+    print('TYPE IS OK!')
+
+
+# 7. Получите список атрибутов экземпляра класса в начале __init__, в середине __init__ и в конце __init__, (стр. 28-30)
+#    а также после создания объекта.
+#    Опишите результат.
+print("Task #7")
+class GlassFive:
+    def __init__(self):
+        print(dir(self))
+        self.capacity_volume = 500
+        print(dir(self))
+        self.occuped_volume = 0
+        print(dir(self))
+
+    def add_water(self, water):
+        pass
+
+glass5_1 = GlassFive()
+print(dir(glass5_1))
+
+# 8. Создайте три объекта стакан. (стр. 27)
+#    Получите id для каждого объекта с соответсвующим id переменной self.
+
+# 9. Разработчик Вася написал код. Всё ли корректно?
+#    Запустите код.
+
+class d:
+    def __init__(f, a=2):
+        f.a = a
+
+    def print_me(p):
+        print(p.a)
+
+
+d.print_me(d())
+
+
+#    Работает? Да, работает. На след. лекции узнаете почему.
+#    Исправьте код.
+
+# 10. Исправьте
+class A:
+    def __init__(self, a):
+        if 10 < a < 50:
+            return
+        self.a = a;
+
+
+# ---------------------------------------------------------------------------------------------
+# "Деструктор" __del__ (стр. 34-38)
+
+# Отключите сборщик мусора
+# import gc
+# dc.disable()
+# Ручная сборка мусора gc.collect()
+
+# 1. Создайте любой класс, перегрузите __del__
+#    Создайте объект и удалите его, запустите сборку мусора.
+#    Убедитесь, что сборка мусора успешно отработала.
+
+# ---------------------------------------------------------------------------------------------
+# Циклическая зависимость (стр. 39-44)
+
+
+# 1. Создайте циклическую зависимость, получите картинку
+# import objgraph
+# x = []
+# x.append(x)
+# objgraph.show_refs([x], filename=r'D:\Users\graph.png')
+
+# 2. Визуализируйте код
+#   x = []
+#   y = [x, x]
+#   x.append(x)
+#   x.append(y)
+
+# 3. Создайте двусвязный список
+class Item:
+    def __init__(self, next_, prev_):
+        ...
+
+# Создайте список, посмотрите с помощью objgraph
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
