@@ -1,0 +1,81 @@
+import weakref
+
+
+class MyList:
+
+    class Item:
+        def __init__(self, value, key: int, next_=None, prev_=None):
+            self.value = value
+            try:
+                if not isinstance(key, int):
+                    raise TypeError
+            except TypeError:
+                print("Key type error")
+
+            self.key = key
+            self.next = next_
+            self.prev = prev_
+
+        def set_next(self, next_):
+            self.next = next_
+
+        def set_prev(self, prev_):
+            self.prev = weakref.ref(prev_)
+
+    def __init__(self):
+        self.head = self.Item(0, 0)
+        self.tail = self.Item(0, 0)
+        self.head.set_next(self.tail)
+        self.tail.set_prev(self.head)
+
+    def __find(self, key: int):
+        curr_item = self.head.next
+        while curr_item is not self.tail:
+            if curr_item.key == key:
+                return curr_item
+
+    def find(self, key):
+        item = self.__find(key)
+        if item is not None:
+            return item.value
+
+    def add_item(self, value, key):
+        new_item = self.Item(value, key)
+        new_item.set_next(self.head.next)
+        self.head.set_next(new_item)
+
+        new_item.next.set_prev(new_item)
+        new_item.set_prev(self.head)
+
+    def show_me(self, isreverse=False):
+        if isreverse:
+            curr_item = self.tail.prev
+            final_item = self.head
+        else:
+            curr_item = self.head.next
+            final_item = self.tail
+
+
+
+        i = 0
+        while curr_item is not final_item:
+            i += 1
+            print("{}: Item {} value {}".format(curr_item, i, curr_item.value))
+            if isreverse:
+                curr_item = curr_item.prev
+            else:
+                curr_item = curr_item.next
+
+        if i == 0:
+            print('List is empty')
+
+lst = MyList()
+lst.add_item('A', 1)
+lst.add_item('B', 2)
+lst.add_item('B2', 2)
+lst.add_item('C', 3)
+#lst.show_me()
+lst.show_me(True)
+
+
+
