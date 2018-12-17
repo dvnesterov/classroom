@@ -1,0 +1,82 @@
+class Byte:
+    def __init__(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError
+
+        if value > 255:
+            self.value = 255
+        elif value < 0:
+            self.value = 0
+        else:
+            self.value = value
+
+    def __add__(self, other):
+        if not isinstance(value, (int, float)):
+            raise TypeError
+
+        if isinstance(other, int):
+            newval = self.value + other
+        if isinstance(other, Byte):
+            newval = self.value + other.value
+
+        if newval > 255:
+            newval = 255
+        elif newval < 0:
+            newval = 0
+
+        return Byte(newval)
+
+    def __sub__(self, other):
+        if isinstance(other, int):
+            newval = self.value - other
+        if isinstance(other, Byte):
+            newval = self.value - other.value
+
+        if newval > 255:
+            newval = 255
+        elif newval < 0:
+            newval = 0
+
+        return Byte(newval)
+
+    def __truediv__(self, other):
+        if isinstance(other, int):
+            newval = self.value // other
+        if isinstance(other, Byte):
+            newval = self.value // other.value
+
+        if newval > 255:
+            newval = 255
+        elif newval < 0:
+            newval = 0
+
+        return Byte(newval)
+
+    def __mul__(self, other):
+        if isinstance(other, int):
+            newval = self.value * other
+        if isinstance(other, Byte):
+            newval = self.value * other.value
+
+        if newval > 255:
+            newval = 255
+        elif newval < 0:
+            newval = 0
+
+        return Byte(newval)
+
+
+
+    def __str__(self):
+        return f'Byte: [self.value]'
+
+    def __repr__(self):
+        return f'Byte: [self.value]'
+
+
+
+b = Byte(5)
+print(b + 6)
+print(b * 60)
+print(b / 2)
+
