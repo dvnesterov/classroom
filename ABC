@@ -1,0 +1,69 @@
+from abc import ABCMeta, abstractmethod
+import math
+
+
+class Figure(metaclass=ABCMeta):
+    def __init__(self, name=None):
+        self.__name = name
+
+    def __str__(self):
+        return self.__name
+
+    @abstractmethod
+    def area(self):
+        ...
+
+    @abstractmethod
+    def perimeter(self):
+        ...
+
+
+class Rectangle(Figure):
+    def __init__(self, a, b, name=None):
+        super().__init__(name)
+        self.__a = a
+        self.__b = b
+
+    def area(self):
+        return self.__a*self.__b
+
+    def perimeter(self):
+        return (self.__a + self.__b) * 2
+
+
+class Triangle(Figure):
+    def __init__(self, a, b, c, alpha, name=None):
+        super().__init__(name)
+        self.__a = a
+        self.__b = b
+        self.__c = c
+        self.__alpha = alpha
+
+    def area(self):
+        return (self.__a * self.__b * math.sin(self.__b * self.__alpha))/2
+
+    def perimeter(self):
+        return self.__a + self.__b + self.__c
+
+
+class Ellipse(Figure):
+    def __init__(self, a, b, name=None):
+        super().__init__(name)
+        self.__a = a
+        self.__b = b
+
+    def area(self):
+        return self.__a * self.__b * math.pi
+
+    def perimeter(self):
+        return math.sqrt((self.__a**2 + self.__b**2)/2)*2*math.pi
+
+
+r = Rectangle(2, 3)
+print(r.area())
+print(r.perimeter())
+
+
+t = Triangle(2, 3)
+print(t.area())
+print(t.perimeter())
